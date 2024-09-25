@@ -32,9 +32,12 @@ jobs:
         poetry install
     - name: Run UnitTests
       run: |
-        poetry run python -m unittest ./tests/main_test.py
+        poetry run coverage run --source=./donnedessousmathiasvanhee  -m  unittest ./tests/main_test.py
+        coverage report -m
     - name: Build package
       if: github.ref == 'refs/heads/main'
       run: |
         poetry config pypi-token.pypi ${{ secrets.MATHIAS_PYPI }}
         poetry publish --build
+        
+        
